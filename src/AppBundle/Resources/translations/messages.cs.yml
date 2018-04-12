@@ -1,0 +1,10 @@
+emails:
+  password_recovery:
+    subject: 'Ahoj, %userFirstName%, obnov si heslo!'
+    title: 'Zapomněl jsi?'
+    html_title: 'Obnovit heslo'
+    perex: 'Zapomněl si heslo? Nevadí, stačí kliknout dolů.'
+    your_data: 'Tvůj účet'
+    email: 'Email'
+    confirm: 'Pokud to je v pořádku, klikni...'
+    recover: 'Obnovit heslo'

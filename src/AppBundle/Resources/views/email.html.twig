@@ -1,0 +1,96 @@
+{% block subject %}{{ subject }}{% endblock subject %}
+{% block bodyText %}{{ textBody }}{% endblock bodyText %}
+
+{% block bodyHtml %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--[if !mso]><!-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--<![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block htmlTitle %}{{ htmlTitle }}{% endblock %}</title>
+    <style type="text/css">
+        /* Basics */
+        body {
+            margin: 0 !important;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            font-family: sans-serif;
+            color: #333333;
+        }
+
+        td {
+            padding: 0;
+        }
+
+        img {
+            border: 0;
+        }
+
+        div[style*="margin: 16px 0"] {
+            margin:0 !important;
+        }
+
+        .wrapper {
+            width: 100%;
+            table-layout: fixed;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        .webkit {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @media only screen and (min-device-width: 375px) and (max-device-width: 413px) { /* iPhone 6 and 6+ */
+            .email-container {
+                min-width: 375px !important;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            /* Forces Gmail app to display email full width */
+            u ~ div .email-container {
+                min-width: 100vw;
+            }
+        }
+    </style>
+
+    <!-- Progressive Enhancements : BEGIN -->
+    <style>
+        /* Media Queries */
+        @media screen and (max-width: 600px) {
+
+            /* Adjust typography on small screens to improve readability */
+            .email-container p {
+                font-size: 17px !important;
+            }
+
+        }
+
+    </style>
+    <!-- Progressive Enhancements : END -->
+
+    <!--Makes background images in 72ppi Outlook render at correct size. -->
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:AllowPNG/>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+</head>
+<body width="100%" style="margin: 0; mso-line-height-rule: exactly;">
+{% block htmlContent %}{{ htmlBody|raw }}{% endblock %}
+</body>
+</html>
+{% endblock bodyHtml %}

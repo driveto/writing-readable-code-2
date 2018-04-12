@@ -1,0 +1,44 @@
+# Learn more about services, parameters and containers at
+# https://symfony.com/doc/current/service_container.html
+parameters:
+    #parameter_name: value
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        # automatically injects dependencies in your services
+        autowire: true
+        # automatically registers your services as commands, event subscribers, etc.
+        autoconfigure: true
+        # this means you cannot fetch services directly from the container via $container->get()
+        # we need this because of unit testing, you can override this setting on individual services
+        public: true
+
+    AppBundle\Mail\Compose\MailComposer:
+        public: true
+
+    AppBundle\Mail\SwiftMessage\SwiftMessagePreparer:
+        public: true
+
+    AppBundle\Mail\Template\MailBlockRenderer:
+        public: true
+
+    AppBundle\System\Environment\EnvironmentGetter:
+        arguments:
+            - '%kernel.environment%'
+
+    AppBundle\Test\UglyTestCommand:
+
+    AppBundle\Test\TestCommand:
+
+    AppBundle\UglyMail\UglyMailer:
+        arguments:
+            $options: '%mailer_options%'
+
+    AppBundle\User\Password\PasswordGetter:
+        arguments:
+            - '@Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder'
+
+    Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder:
+        arguments:
+            $cost: 4
