@@ -43,6 +43,7 @@ class UglyMailer
      * @param int $userId
      * @param string $hash
      * @return int
+     * @deprecated A to ještě není to nejhorší!
      */
     public function sendForgottenPasswordEmail(int $userId, string $hash): int
     {
@@ -68,11 +69,20 @@ class UglyMailer
     public function sendOrderEmail(Checkout $checkout)
     {
         //FIXME - ***** ****, This is ugly. tracker ****
-        $superChargeBundleItems = [];
+        $extraBundleItems = [];
 
+        /** @var CheckoutBundle $bundle */
+        foreach ($checkout->getCheckoutBundles() as $bundle) {
+            /** @var CheckoutBundleItem $item */
+            foreach ($bundle->getItems() as $item) {
+                if ($this->productRepository->isSpecialProduct($item->getProduct()->getSpecialId())) {
+                    $superChargeBundleItems[] = $item;
+                }
+            }
+        }
         $templateParameters = [
             'checkout' => $checkout,
-            'superChargeBundleItems' => $superChargeBundleItems,
+            'extraBundleItems' => $extraBundleItems,
             'clickAndCollectStore' => $checkout->getClickCollectCode() ? $this->storeRepository->findOneBy(['gxCode' => $checkout->getClickCollectGxCode()]) : null,
         ];
 
